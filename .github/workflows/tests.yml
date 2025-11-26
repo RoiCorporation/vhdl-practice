@@ -20,6 +20,7 @@ jobs:
       - name: 🧪 Run VHDL tests for all practice exercises
         run: |
           for d in */; do
+            folder_name=${d%/}
             echo "🧪 Testing $d"
             nvc -a "$d"/*.vhd
             tb=$(basename "$d")_tb
@@ -28,5 +29,5 @@ jobs:
             tbname=$(basename "$tbfile" .vhd)
             nvc -e "$tbname"
             nvc -r "$tbname" --exit-severity=error
-            echo "✅ $d passed"
+            echo "✅ $folder_name passed"
           done
