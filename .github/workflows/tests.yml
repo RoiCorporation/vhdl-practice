@@ -7,6 +7,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    name: VHDL exercises tests
 
     steps:
       - name: Checkout
@@ -21,7 +22,7 @@ jobs:
         run: |
           for d in */; do
             folder_name=${d%/}
-            echo "🧪 Testing $d"
+            echo "🧪 Testing $folder_name"
             nvc -a "$d"/*.vhd
             tb=$(basename "$d")_tb
             # Find the testbench file (the one ending with _tb.vhd)
