@@ -65,8 +65,5 @@ gtkwave waves.vcd
 
 
 ## 🧪 Testing design files
-To test all exercises at once, run the testing script from anywhere inside the
-repository.
-```
-./test_exercises.sh
-```
+To test all exercises at once, simply run the [testing script](./test_exercises.sh) 
+from anywhere inside the repository.
