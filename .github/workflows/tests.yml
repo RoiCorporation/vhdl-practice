@@ -17,7 +17,7 @@ jobs:
         with:
           version: latest
 
-      - name: 🧪 Run VHDL tests for all subfolders
+      - name: 🧪 Run VHDL tests for all practice exercises
         run: |
           for d in */; do
             echo "🧪 Testing $d"

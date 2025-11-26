@@ -29,6 +29,9 @@ begin
     a <= '0';
     b <= '0';
     wait for 10 ns;
+    assert y = '0'
+    report "0 AND 0 should be 0, got " & std_logic'image(y)
+      severity error;
 
     -- Test 01
     a <= '0';
@@ -42,11 +45,17 @@ begin
     a <= '1';
     b <= '0';
     wait for 10 ns;
+    assert y = '0'
+    report "1 AND 0 should be 0, got " & std_logic'image(y)
+      severity error;
 
     -- Test 11
     a <= '1';
     b <= '1';
     wait for 10 ns;
+    assert y = '1'
+    report "1 AND 1 should be 1, got " & std_logic'image(y)
+      severity error;
 
     -- End simulation
     wait;

@@ -11,5 +11,5 @@ end entity and_gate;
 
 architecture rtl of and_gate is
 begin
-    y <= a or b;
+    y <= a and b;
 end architecture rtl;
