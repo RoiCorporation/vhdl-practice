@@ -32,3 +32,4 @@ jobs:
             nvc -r "$tbname" --exit-severity=error
             echo "✅ $folder_name passed"
           done
+          echo "✅ All tests passed!"

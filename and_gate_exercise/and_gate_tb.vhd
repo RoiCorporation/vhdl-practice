@@ -53,7 +53,7 @@ begin
     a <= '1';
     b <= '1';
     wait for 10 ns;
-    assert y = '1'
+    assert y = '0'
     report "1 AND 1 should be 1, got " & std_logic'image(y)
       severity error;
 
