@@ -1,0 +1,32 @@
+name: VHDL practice exercises CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NVC
+        uses: nickg/setup-nvc@v1
+        with:
+          version: latest
+
+      - name: 🧪 Run VHDL tests for all subfolders
+        run: |
+          for d in */; do
+            echo "🧪 Testing $d"
+            nvc -a "$d"/*.vhd
+            tb=$(basename "$d")_tb
+            # Find the testbench file (the one ending with _tb.vhd)
+            tbfile=$(ls "$d"/*_tb.vhd | head -n 1)
+            tbname=$(basename "$tbfile" .vhd)
+            nvc -e "$tbname"
+            nvc -r "$tbname" --exit-severity=error
+            echo "✅ $d passed"
+          done
