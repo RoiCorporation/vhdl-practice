@@ -19,27 +19,38 @@ jobs:
           version: latest
 
       - name: 🧪 Run VHDL tests for all practice exercises
+        shell: bash
         run: |
+          set -euo pipefail
+          shopt -s nullglob
           for d in */; do
             folder_name=${d%/}
             echo "🧪 Testing $folder_name"
-            nvc -a "$d"/*.vhd || { 
-              echo "❌ Analysis failed in $folder_name"
-              exit 1
-            }
-            tbfile=$(ls "$d"/*_tb.vhd | head -n 1) || { 
-              echo "❌ No testbench found in $folder_name"
-              exit 1
-            }
-            tbname=$(basename "$tbfile" .vhd)
-            nvc -e "$tbname" || { 
-              echo "❌ Elaboration failed for $tbname in $folder_name"
-              exit 1 
-            }
-            nvc -r "$tbname" --exit-severity=error || {
-              echo "❌ Simulation failed for $tbname in $folder_name"
-              exit 1
-            }
+              nvc -a "$d"/*.vhd || { 
+                echo "❌ Analysis failed in $folder_name"
+                rm -rf work
+                exit 1
+              }
+              shopt -s nullglob
+
+              tbfiles=( "$d"/*_tb.vhd )
+              if (( ${#tbfiles[@]} == 0 )); then
+                echo "❌ No testbench found in $folder_name"
+                rm -rf work
+                exit 1
+              fi
+
+              tbname=$(basename "${tbfiles[0]}" .vhd)
+              nvc -e "$tbname" || { 
+                echo "❌ Elaboration failed for $tbname in $folder_name"
+                rm -rf work
+                exit 1 
+              }
+              nvc -r "$tbname" --exit-severity=error || {
+                echo "❌ Simulation failed for $tbname in $folder_name"
+                rm -rf work
+                exit 1
+              }
             echo "✅ $folder_name passed"
           done
           echo "✅ All tests passed!"
