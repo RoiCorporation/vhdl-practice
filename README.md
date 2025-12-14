@@ -44,7 +44,7 @@ which gtkwave
 
 
 
-## 🚀 Running a simulation and visualizing the wave form
+## 🚀 Running a simulation and visualizing the waveform
 To run a simulation and generate the corresponding waveform, follow the 
 structure of this command:
 ```
