@@ -1,0 +1,58 @@
+name: VHDL practice exercises CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: VHDL exercises tests
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install NVC
+        uses: nickg/setup-nvc@v1
+        with:
+          version: latest
+
+      - name: 🧪 Run VHDL tests for all practice exercises
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          for d in */; do
+            folder_name=${d%/}
+            if [[ $folder_name != "register_8_bit_exercise" ]]; then
+              echo "🧪 Testing $folder_name"
+                nvc -a "$d"/*.vhd || { 
+                  echo "❌ Analysis failed in $folder_name"
+                  rm -rf work
+                  exit 1
+                }
+                shopt -s nullglob
+
+                tbfiles=( "$d"/*_tb.vhd )
+                if (( ${#tbfiles[@]} == 0 )); then
+                  echo "❌ No testbench found in $folder_name"
+                  rm -rf work
+                  exit 1
+                fi
+
+                tbname=$(basename "${tbfiles[0]}" .vhd)
+                nvc -e "$tbname" || { 
+                  echo "❌ Elaboration failed for $tbname in $folder_name"
+                  rm -rf work
+                  exit 1 
+                }
+                nvc -r "$tbname" --exit-severity=error || {
+                  echo "❌ Simulation failed for $tbname in $folder_name"
+                  rm -rf work
+                  exit 1
+                }
+              echo "✅ $folder_name passed"
+            fi
+          done
+          echo "✅ All tests passed!"
