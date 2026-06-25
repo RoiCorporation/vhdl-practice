@@ -1,4 +1,4 @@
-# vhdl-practice
+# VHDL practice repository
 Repository with self-made exercises to improve my VHDL skills. The 
 [NVC tool](https://github.com/nickg/nvc) is used as the compiler and simulator
 for the VHDL code. To produce and visualize waveform files from NVC simulations,
