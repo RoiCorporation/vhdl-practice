@@ -25,7 +25,7 @@ jobs:
           shopt -s nullglob
           for d in */; do
             folder_name=${d%/}
-            if [[ $folder_name != "register_8_bit_exercise" ]]; then
+            if [ $folder_name != "register_8_bit_exercise" ] && [ $folder_name != "d_flip_flop_exercise" ]; then
               echo "🧪 Testing $folder_name"
                 nvc -a "$d"/*.vhd || { 
                   echo "❌ Analysis failed in $folder_name"
