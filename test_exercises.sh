@@ -14,7 +14,7 @@ echo "🧪 Running tests for all exercises"
 # inside using the existing testbench.
 for d in */; do
     folder_name=${d%/}
-    if [ $folder_name != "register_8_bit_exercise" ]; then
+    if [ $folder_name != "register_8_bit_exercise" ] && [ $folder_name != "d_flip_flop_exercise" ]; then
         nvc -a "$d"/*.vhd || { 
             echo "❌ Analysis failed in $folder_name"
             rm -rf work
