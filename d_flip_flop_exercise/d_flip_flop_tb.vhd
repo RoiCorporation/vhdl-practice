@@ -6,14 +6,16 @@ entity d_flip_flop_tb is
 end;
 
 architecture bench of d_flip_flop_tb is
-    -- Clock period
-    constant clk_period : time := 5 fs;
-    -- Generics
+    
+    -- Constants
+    constant clk_period : time := 6 fs;
+
     -- Ports
     signal d : std_logic := '0';
     signal clk : std_logic := '0';
     signal q : std_logic := '0';
     signal q_neg : std_logic := '0';
+
 begin
 
     dut : entity work.d_flip_flop
@@ -143,6 +145,6 @@ begin
             severity error;
 
         wait;
-    end process;
+    end process stim_proc;
 
 end;
