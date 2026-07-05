@@ -1,4 +1,4 @@
-name: VHDL practice exercises CI
+name: VHDL practice exercises tests
 
 on:
   push:
