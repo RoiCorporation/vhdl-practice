@@ -28,40 +28,10 @@ begin
 
     p_clk : process
     begin
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
-        clk <= not clk;
-        wait for clk_period/2;
+        for i in 1 to 3000 loop
+            wait for clk_period / 2;
+            clk <= not clk;
+        end loop;
         wait;
     end process p_clk;
 
@@ -147,4 +117,4 @@ begin
         wait;
     end process stim_proc;
 
-end;
+end architecture bench;
