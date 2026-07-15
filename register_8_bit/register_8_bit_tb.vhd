@@ -4,7 +4,8 @@ use ieee.numeric_std.all;
 
 
 entity register_8_bit_tb is
-end register_8_bit_tb;
+end entity register_8_bit_tb;
+
 
 architecture beh of register_8_bit_tb is
 

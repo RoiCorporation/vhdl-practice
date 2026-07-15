@@ -2,8 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+
 entity d_flip_flop_tb is
-end;
+end entity d_flip_flop_tb;
+
 
 architecture bench of d_flip_flop_tb is
     

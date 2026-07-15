@@ -149,6 +149,5 @@ begin
 
         wait;
     end process stim_proc;
-    
 
 end architecture;
