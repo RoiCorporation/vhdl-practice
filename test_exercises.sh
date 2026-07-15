@@ -14,9 +14,10 @@ echo "🧪 Running tests for all exercises"
 # inside using the existing testbench.
 for d in */; do
     folder_name=${d%/}
-    if [ $folder_name != "register_8_bit_exercise" ]; then
+    if [ $folder_name != "register_8_bit" ]; then
+        echo "🧪 Testing $folder_name exercise"
         nvc -a "$d"/*.vhd || { 
-            echo "❌ Analysis failed in $folder_name"
+            echo "❌ Analysis failed in $folder_name exercise"
             rm -rf work
             exit 1
         }
@@ -24,23 +25,23 @@ for d in */; do
 
         tbfiles=( "$d"/*_tb.vhd )
         if (( ${#tbfiles[@]} == 0 )); then
-            echo "❌ No testbench found in $folder_name"
+            echo "❌ No testbench found in $folder_name exercise"
             rm -rf work
             exit 1
         fi
 
         tbname=$(basename "${tbfiles[0]}" .vhd)
         nvc -e "$tbname" || { 
-            echo "❌ Elaboration failed for $tbname in $folder_name"
+            echo "❌ Elaboration failed for $tbname in $folder_name exercise"
             rm -rf work
             exit 1 
         }
         nvc -r "$tbname" --exit-severity=error || {
-            echo "❌ Simulation failed for $tbname in $folder_name"
+            echo "❌ Simulation failed for $tbname in $folder_name exercise"
             rm -rf work
             exit 1
         }
-        echo "✅ $folder_name passed"
+        echo "✅ $folder_name test passed"
     fi
 done
 
