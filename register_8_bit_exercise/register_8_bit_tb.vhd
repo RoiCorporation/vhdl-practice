@@ -23,30 +23,30 @@ begin
     p_input : process
     begin
         input <= (7 downto 1 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
         input <= (7 downto 2 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
         input <= (7 downto 3 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
         input <= (7 downto 4 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
         input <= (7 downto 5 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
         input <= (7 downto 6 => '1', others => '0');
-        wait for 18fs;
+        wait for 18 fs;
     end process p_input;
 
     p_rst : process
     begin
-        wait for 3fs;
+        wait for 3 fs;
         rst <= '1';
-        wait for 40fs;
+        wait for 40 fs;
         rst <= '0';
-        wait for 15fs;
+        wait for 15 fs;
     end process p_rst;
 
     p_clk : process
-        constant clk_period : time := 20fs;
+        constant clk_period : time := 20 fs;
     begin
         clk <= '1';
         wait for clk_period/2;
