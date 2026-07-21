@@ -3,8 +3,8 @@ use ieee.std_logic_1164.all;
 
 entity or_gate is
     port (
-        a : in  std_logic;
-        b : in  std_logic;
+        a : in std_logic;
+        b : in std_logic;
         y : out std_logic
     );
 end entity or_gate;

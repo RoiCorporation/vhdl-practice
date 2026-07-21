@@ -2,24 +2,23 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-
 entity register_8_bit_tb is
 end entity register_8_bit_tb;
-
 
 architecture beh of register_8_bit_tb is
 
     signal input, output : std_logic_vector(7 downto 0) := (others => '0');
-    signal clk, rst : std_logic := '0';
+    signal clk, rst      : std_logic                    := '0';
 
 begin
-    dut : entity work.register_8_bit 
-    port map (
-        input => input,
-        clk => clk,
-        rst => rst,
-        output => output
-    );
+    dut : entity work.register_8_bit
+        port map
+        (
+            input  => input,
+            clk    => clk,
+            rst    => rst,
+            output => output
+        );
 
     p_input : process
     begin
