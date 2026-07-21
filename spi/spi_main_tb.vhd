@@ -1,0 +1,112 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+entity spi_main_tb is
+end entity spi_main_tb;
+architecture rtl of spi_main_tb is
+
+  -- Constants.
+  constant bits_per_message : integer := 8;
+  constant clk_period       : time    := 6 fs;
+
+  -- Outbound data buffer ports.
+  signal outbound_buffer_input  : std_logic_vector(bits_per_message - 1 downto 0) := (others => '0');
+  signal outbound_buffer_output : std_logic_vector(bits_per_message - 1 downto 0) := (others => '0');
+  signal outbound_buffer_load   : std_logic                                       := '0';
+
+  -- Inbound data buffer ports.
+  signal inbound_buffer_input  : std_logic_vector(bits_per_message - 1 downto 0) := (others => '0');
+  signal inbound_buffer_output : std_logic_vector(bits_per_message - 1 downto 0) := (others => '0');
+  signal inbound_buffer_load   : std_logic                                       := '0';
+
+  -- Rest of the ports.
+  signal start_transmission : std_logic := '0';
+  signal mosi               : std_logic := '0';
+  signal miso               : std_logic := '0';
+  signal cs                 : std_logic := '0';
+  signal clk                : std_logic := '0';
+  signal sclk               : std_logic;
+  signal cpol               : std_logic := '0';
+  signal cpha               : std_logic := '0';
+  signal rst                : std_logic := '0';
+
+begin
+
+  dut : entity work.spi_main
+    port map
+    (
+      outbound_buffer_input  => outbound_buffer_input,
+      outbound_buffer_output => outbound_buffer_output,
+      outbound_buffer_load   => outbound_buffer_load,
+      inbound_buffer_input   => inbound_buffer_input,
+      inbound_buffer_output  => inbound_buffer_output,
+      inbound_buffer_load    => inbound_buffer_load,
+      start_transmission     => start_transmission,
+      mosi                   => mosi,
+      miso                   => miso,
+      cs                     => cs,
+      clk                    => clk,
+      sclk                   => sclk,
+      cpol                   => cpol,
+      cpha                   => cpha,
+      rst                    => rst
+    );
+
+  -- Clock process.
+  p_clk : process
+  begin
+    for i in 1 to 3000 loop
+      wait for clk_period / 2;
+      clk <= not clk;
+    end loop;
+    wait;
+  end process p_clk;
+  -- Stimulus process.
+  stim_proc : process
+  begin
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    cpol <= '1';
+    rst  <= '1';
+    miso <= '1';
+    wait until rising_edge(clk);
+    wait for 1 fs;
+    rst <= '0';
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait until rising_edge(clk);
+    wait for 1 fs;
+    outbound_buffer_input <= "11011111";
+    outbound_buffer_load  <= '1';
+    wait until falling_edge(clk);
+    wait for 1 fs;
+    outbound_buffer_load <= '0';
+    wait until falling_edge(clk);
+    wait until falling_edge(clk);
+    start_transmission <= '1';
+    wait until falling_edge(clk);
+    wait for 1 fs;
+    start_transmission <= '0';
+    wait until rising_edge(clk);
+    -- wait for 1 fs;
+    -- wait until rising_edge(sclk);
+    -- wait for 1 fs;
+    -- miso <= '1';
+    -- wait until falling_edge(sclk);
+    -- wait for 1 fs;
+    -- miso <= '0';
+    -- wait until falling_edge(sclk);
+    -- wait for 1 fs;
+    -- miso <= '1';
+    -- wait until falling_edge(sclk);
+    -- wait for 1 fs;
+    -- miso <= '0';
+    wait;
+  end process stim_proc;
+
+end architecture rtl;

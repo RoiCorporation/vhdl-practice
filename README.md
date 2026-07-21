@@ -1,12 +1,12 @@
 # VHDL practice repository
-Repository with self-made exercises to improve my VHDL skills. The 
+Repository with self-made exercises to improve my VHDL skills. The
 [NVC tool](https://github.com/nickg/nvc) is used as the compiler and simulator
 for the VHDL code. To produce and visualize waveform files from NVC simulations,
 [GTKWave wave viewer](https://github.com/gtkwave/gtkwave) is used.
 
 
 
-## 📦 Installing libraries 
+## 📦 Installing libraries
 
 ### 🖥️ Installing NVC
 1. Install NVC.
@@ -45,7 +45,7 @@ which gtkwave
 
 
 ## 🚀 Running a simulation and visualizing the waveform
-To run a simulation and generate the corresponding waveform, follow the 
+To run a simulation and generate the corresponding waveform, follow the
 structure of this command:
 ```
 nvc -a design.vhd design_tb.vhd -e design_tb -r design_tb --wave=waves.vcd
@@ -53,7 +53,7 @@ nvc -a design.vhd design_tb.vhd -e design_tb -r design_tb --wave=waves.vcd
 , where:
 - _**design.vhd**_ is the _Design Under Test_ (DUT), containing the logic
 design and the hardware's behavior. It gets compiled into the _work_ folder.
-- _**design_tb.vhd**_ is the testbench, used only in simulation to instantiate 
+- _**design_tb.vhd**_ is the testbench, used only in simulation to instantiate
 the DUT, drive its inputs, and verify its outputs.
 - _**waves.vcd**_ is the file that stores the waveform generated during simulation.
 
@@ -65,5 +65,5 @@ gtkwave waves.vcd
 
 
 ## 🧪 Testing design files
-To test all exercises at once, simply run the [testing script](./test_exercises.sh) 
+To test all exercises at once, simply run the [testing script](./test_exercises.sh)
 from anywhere inside the repository.
