@@ -1,6 +1,8 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&emsp;[![VHDL practice exercises tests](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml/badge.svg)](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml)
 
 
+
+
 # VHDL practice repository
 Repository with self-made exercises to improve my VHDL skills. The
 [NVC tool](https://github.com/nickg/nvc) is used as the compiler and simulator
