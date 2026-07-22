@@ -31,6 +31,9 @@ architecture rtl of spi_main_tb is
     signal cpol               : std_logic := '0';
     signal cpha               : std_logic := '0';
     signal rst                : std_logic := '0';
+    signal sclk_rising_edge   : std_logic;
+    signal sclk_falling_edge  : std_logic;
+    signal last_shift_bit     : std_logic;
 
 begin
 
@@ -51,7 +54,10 @@ begin
             sclk                   => sclk,
             cpol                   => cpol,
             cpha                   => cpha,
-            rst                    => rst
+            rst                    => rst,
+            sclk_rising_edge_port  => sclk_rising_edge,
+            sclk_falling_edge_port => sclk_falling_edge,
+            last_shift_bit         => last_shift_bit
         );
 
     -- Clock process.
@@ -68,7 +74,8 @@ begin
     begin
         wait until rising_edge(clk);
         wait until rising_edge(clk);
-        cpol <= '1';
+        cpha <= '0';
+        cpol <= '0';
         rst  <= '1';
         miso <= '1';
         wait until rising_edge(clk);
@@ -85,9 +92,13 @@ begin
         wait for 1 fs;
         outbound_buffer_input <= "11011111";
         outbound_buffer_load  <= '1';
+        inbound_buffer_input  <= "00001010";
+        inbound_buffer_load   <= '1';
         wait until falling_edge(clk);
+        wait until rising_edge(clk);
         wait for 1 fs;
         outbound_buffer_load <= '0';
+        inbound_buffer_load  <= '0';
         wait until falling_edge(clk);
         wait until falling_edge(clk);
         start_transmission <= '1';
@@ -95,6 +106,43 @@ begin
         wait for 1 fs;
         start_transmission <= '0';
         wait until rising_edge(clk);
+        for i in 1 to 250 loop
+            wait until rising_edge(clk);
+        end loop;
+        cpol <= '1';
+        cpha <= '1';
+        rst  <= '1';
+        miso <= '1';
+        wait until rising_edge(clk);
+        wait for 1 fs;
+        rst <= '0';
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait until rising_edge(clk);
+        wait for 1 fs;
+        outbound_buffer_input <= "11011111";
+        outbound_buffer_load  <= '1';
+        inbound_buffer_input  <= "00001010";
+        inbound_buffer_load   <= '1';
+        wait until falling_edge(clk);
+        wait until rising_edge(clk);
+        wait for 1 fs;
+        outbound_buffer_load <= '0';
+        inbound_buffer_load  <= '0';
+        wait until falling_edge(clk);
+        wait until falling_edge(clk);
+        start_transmission <= '1';
+        wait until falling_edge(clk);
+        wait until rising_edge(clk);
+        wait for 1 fs;
+        start_transmission <= '0';
+        wait until rising_edge(clk);
+
         -- wait for 1 fs;
         -- wait until rising_edge(sclk);
         -- wait for 1 fs;
