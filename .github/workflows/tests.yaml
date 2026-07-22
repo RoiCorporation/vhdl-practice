@@ -23,11 +23,12 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s nullglob
+          cd practice_exercises
           for d in */; do
             folder_name=${d%/}
             if [ $folder_name != "register_8_bit" ]; then
               echo "🧪 Testing $folder_name exercise"
-                nvc -a "$d"/*.vhd || { 
+                nvc -a "$d"/*.vhd || {
                   echo "❌ Analysis failed in $folder_name exercise"
                   rm -rf work
                   exit 1
@@ -42,10 +43,10 @@ jobs:
                 fi
 
                 tbname=$(basename "${tbfiles[0]}" .vhd)
-                nvc -e "$tbname" || { 
+                nvc -e "$tbname" || {
                   echo "❌ Elaboration failed for $tbname in $folder_name exercise"
                   rm -rf work
-                  exit 1 
+                  exit 1
                 }
                 nvc -r "$tbname" --exit-severity=error || {
                   echo "❌ Simulation failed for $tbname in $folder_name exercise"
