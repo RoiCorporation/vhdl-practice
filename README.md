@@ -1,4 +1,4 @@
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)&emsp;[![VHDL practice exercises tests](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml/badge.svg)](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml)
+[![](https://img.shields.io/badge/License-MIT-yellow.svg)](/LICENSE)&emsp;[![VHDL practice exercises tests](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml/badge.svg)](https://github.com/RoiCorporation/vhdl-practice/actions/workflows/tests.yaml)
 
 
 
