@@ -2,10 +2,10 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity traffic_light_fsm_tb is
-end entity traffic_light_fsm_tb;
+entity traffic_light_tb is
+end entity traffic_light_tb;
 
-architecture rtl of traffic_light_fsm_tb is
+architecture rtl of traffic_light_tb is
 
     -- Constants
     constant clk_period : time := 6 fs;
@@ -17,7 +17,7 @@ architecture rtl of traffic_light_fsm_tb is
 
 begin
 
-    dut : entity work.traffic_light_fsm(rtl)
+    dut : entity work.traffic_light(rtl)
         port map
         (
             clk                 => clk,
@@ -107,4 +107,4 @@ begin
         wait;
     end process p_stim;
 
-end architecture;
+end architecture rtl;

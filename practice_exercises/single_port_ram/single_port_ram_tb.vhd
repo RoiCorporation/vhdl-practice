@@ -149,4 +149,4 @@ begin
         wait;
     end process p_stim;
 
-end architecture;
+end architecture rtl;

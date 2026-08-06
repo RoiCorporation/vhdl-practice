@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity traffic_light_fsm is
+entity traffic_light is
 
     generic (
         time_at_green_light  : integer := 10;
@@ -15,16 +15,16 @@ entity traffic_light_fsm is
         signal rst                 : in std_logic;
         signal traffic_light_color : out std_logic_vector(1 downto 0) -- 00 = green, 01 = yellow, 10 = red
     );
-end entity traffic_light_fsm;
+end entity traffic_light;
 
-architecture rtl of traffic_light_fsm is
+architecture rtl of traffic_light is
     type traffic_light_state is (TRAFFIC_FLOW, STOP_IF_SAFE, TRAFFIC_STOPPED);
     signal state                      : traffic_light_state;
     signal traffic_light_color_signal : std_logic_vector(1 downto 0) := (others => '0');
 
 begin
 
-    traffic_light_fsm_beh : process (clk)
+    traffic_light_beh : process (clk)
         variable seconds_since_change : integer := 0;
 
     begin
@@ -69,8 +69,8 @@ begin
             end if;
 
         end if;
-    end process traffic_light_fsm_beh;
+    end process traffic_light_beh;
 
     traffic_light_color <= traffic_light_color_signal;
 
-end architecture;
+end architecture rtl;
