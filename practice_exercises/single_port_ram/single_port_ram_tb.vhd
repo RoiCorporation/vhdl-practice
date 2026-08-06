@@ -21,7 +21,7 @@ architecture rtl of single_port_ram_tb is
 
 begin
 
-    dut : entity work.single_port_ram
+    dut : entity work.single_port_ram(rtl)
         port map
         (
             data_in  => data_in,
@@ -42,7 +42,7 @@ begin
     end process p_clk;
 
     -- Stimulus process
-    stim_proc : process
+    p_stim : process
     begin
         -- Test 01
         wait until falling_edge(clk);
@@ -147,6 +147,6 @@ begin
             severity error;
 
         wait;
-    end process stim_proc;
+    end process p_stim;
 
 end architecture;

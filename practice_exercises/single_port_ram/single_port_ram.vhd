@@ -19,6 +19,7 @@ entity single_port_ram is
     );
 
 end entity single_port_ram;
+
 architecture rtl of single_port_ram is
     type RAM_ARRAY is array (0 to ram_size) of std_logic_vector (data_width - 1 downto 0);
 

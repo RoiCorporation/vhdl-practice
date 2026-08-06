@@ -17,7 +17,7 @@ architecture rtl of traffic_light_fsm_tb is
 
 begin
 
-    dut : entity work.traffic_light_fsm
+    dut : entity work.traffic_light_fsm(rtl)
         port map
         (
             clk                 => clk,
@@ -36,7 +36,7 @@ begin
     end process p_clk;
 
     -- Stimulus process
-    stim_proc : process
+    p_stim : process
     begin
         -- Test 01
         wait for 3 * clk_period + 2 fs;
@@ -105,6 +105,6 @@ begin
             severity error;
 
         wait;
-    end process stim_proc;
+    end process p_stim;
 
 end architecture;

@@ -18,7 +18,7 @@ architecture bench of d_flip_flop_tb is
 
 begin
 
-    dut : entity work.d_flip_flop
+    dut : entity work.d_flip_flop(rtl)
         port map
         (
             d     => d,
@@ -37,7 +37,7 @@ begin
     end process p_clk;
 
     -- Stimulus process
-    stim_proc : process
+    p_stim : process
     begin
         -- Test 01
         d <= '0';
@@ -116,6 +116,6 @@ begin
             severity error;
 
         wait;
-    end process stim_proc;
+    end process p_stim;
 
 end architecture bench;

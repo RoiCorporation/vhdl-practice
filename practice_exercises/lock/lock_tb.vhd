@@ -20,7 +20,7 @@ architecture rtl of lock_tb is
     signal door_open             : std_logic;
 
 begin
-    dut : entity work.lock
+    dut : entity work.lock(rtl)
         port map
         (
             rst                   => rst,
@@ -42,7 +42,7 @@ begin
     end process p_clk;
 
     -- Stimulus process
-    stim_proc : process
+    p_stim : process
     begin
         -- Test 01
         wait until rising_edge(clk);
@@ -198,6 +198,6 @@ begin
         check_combination <= '0';
 
         wait;
-    end process stim_proc;
+    end process p_stim;
 
 end architecture rtl;

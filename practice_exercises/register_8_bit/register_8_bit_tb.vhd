@@ -11,7 +11,7 @@ architecture beh of register_8_bit_tb is
     signal clk, rst      : std_logic                    := '0';
 
 begin
-    dut : entity work.register_8_bit
+    dut : entity work.register_8_bit(rtl)
         port map
         (
             input  => input,

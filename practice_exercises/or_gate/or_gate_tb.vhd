@@ -14,7 +14,7 @@ architecture tb of or_gate_tb is
 begin
 
     -- Instantiate the design
-    uut : entity work.or_gate
+    uut : entity work.or_gate(rtl)
         port map
         (
             a => a,
@@ -23,7 +23,7 @@ begin
         );
 
     -- Stimulus process
-    stim_proc : process
+    p_stim : process
     begin
         -- Test 00
         a <= '0';
@@ -59,6 +59,6 @@ begin
 
         -- End simulation
         wait;
-    end process;
+    end process p_stim;
 
 end architecture tb;

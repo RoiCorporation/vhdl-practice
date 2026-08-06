@@ -10,7 +10,7 @@ entity register_8_bit is
     );
 end entity register_8_bit;
 
-architecture behavior of register_8_bit is
+architecture rtl of register_8_bit is
 begin
     p_reg : process (clk)
     begin
@@ -23,4 +23,4 @@ begin
         end if;
     end process p_reg;
 
-end architecture behavior;
+end architecture rtl;

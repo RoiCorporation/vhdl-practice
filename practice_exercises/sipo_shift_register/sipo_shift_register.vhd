@@ -16,6 +16,7 @@ entity sipo_shift_register is
     );
 
 end entity sipo_shift_register;
+
 architecture rtl of sipo_shift_register is
     signal shift_reg : std_logic_vector(register_width - 1 downto 0) := (others => '0');
 begin
