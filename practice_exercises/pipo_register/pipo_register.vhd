@@ -21,10 +21,10 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --------------------------------------------------------------------------------
---! @title Register
+--! @title PIPO register
 --! @author Roi (r.lopezbarata@gmail.com)
 --! @version 1.0
---! @date 06-08-2026
+--! @date 07-08-2026
 --! @copyright This work is licensed under the MIT License.
 --! @brief Implementation of a classic PIPO register.
 --------------------------------------------------------------------------------
@@ -34,11 +34,11 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 --! This is a classic PIPO register with synchronous reset and load enable.
-entity register is
+entity pipo_register is
 
     -- Generics.
     generic (
-        register_width : integer := 32 --! Width of the register in bits.
+        register_width : integer := 8 --! Width of the register in bits.
     );
 
     -- Ports.
@@ -49,9 +49,9 @@ entity register is
         input  : in std_logic_vector(register_width - 1 downto 0); --! Input data to be loaded into the register.
         output : out std_logic_vector(register_width - 1 downto 0) --! Output data from the register.
     );
-end entity register;
+end entity pipo_register;
 
-architecture rtl of register is
+architecture rtl of pipo_register is
 begin
 
     --! Process that implements the behavior of the register. It updates the output
