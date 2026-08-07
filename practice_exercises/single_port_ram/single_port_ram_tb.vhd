@@ -7,12 +7,12 @@ end entity single_port_ram_tb;
 
 architecture rtl of single_port_ram_tb is
 
-    -- Constants
+    -- Constants.
     constant data_width : integer := 8;
     constant addr_width : integer := 8;
     constant clk_period : time    := 8 fs;
 
-    -- Ports
+    -- Signals.
     signal data_in  : std_logic_vector(data_width - 1 downto 0) := (others => '0');
     signal addr     : std_logic_vector(addr_width - 1 downto 0) := (others => '0');
     signal wr       : std_logic                                 := '0';

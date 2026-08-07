@@ -4,12 +4,14 @@ use ieee.numeric_std.all;
 
 entity single_port_ram is
 
+    -- Generics.
     generic (
         data_width : integer := 8;
         addr_width : integer := 8;
         ram_size   : integer := 127
     );
 
+    -- Ports.
     port (
         data_in  : in std_logic_vector(data_width - 1 downto 0);
         addr     : in std_logic_vector(addr_width - 1 downto 0);

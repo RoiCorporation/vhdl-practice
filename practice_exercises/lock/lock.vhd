@@ -4,14 +4,14 @@ use ieee.numeric_std.all;
 
 entity lock is
 
-    -- Constants
+    -- Generics.
     generic (
         combination_width : integer := 8;
         retries           : integer := 3;
         cycles_door_open  : integer := 5
     );
 
-    -- Ports
+    -- Ports.
     port (
         rst                   : in std_logic;
         clk                   : in std_logic;

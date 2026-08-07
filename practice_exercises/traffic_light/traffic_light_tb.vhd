@@ -7,10 +7,10 @@ end entity traffic_light_tb;
 
 architecture rtl of traffic_light_tb is
 
-    -- Constants
+    -- Constants.
     constant clk_period : time := 6 fs;
 
-    -- Ports
+    -- Signals.
     signal clk                 : std_logic                    := '0';
     signal rst                 : std_logic                    := '0';
     signal traffic_light_color : std_logic_vector(1 downto 0) := (others => '0');

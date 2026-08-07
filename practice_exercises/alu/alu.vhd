@@ -39,13 +39,13 @@ use ieee.numeric_std.all;
 --! result of the operation is output as a 32-bit value.
 entity alu is
 
-    -- Generics
+    -- Generics.
     generic (
         data_length   : integer := 32; --! Length of the input and output data vectors.
         opcode_length : integer := 7 --! Length of the opcode vector.
     );
 
-    -- Ports
+    -- Ports.
     port (
         opcode : in std_logic_vector(opcode_length - 1 downto 0); --! 7-bit opcode input that determines the operation to be performed.
         a      : in std_logic_vector(data_length - 1 downto 0); --! First 32-bit input operand.

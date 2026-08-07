@@ -4,12 +4,14 @@ use ieee.numeric_std.all;
 
 entity traffic_light is
 
+    -- Generics.
     generic (
         time_at_green_light  : integer := 10;
         time_at_yellow_light : integer := 1;
         time_at_red_light    : integer := 3
     );
 
+    -- Ports.
     port (
         signal clk                 : in std_logic;
         signal rst                 : in std_logic;

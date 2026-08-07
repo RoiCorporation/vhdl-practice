@@ -7,10 +7,10 @@ end entity d_flip_flop_tb;
 
 architecture bench of d_flip_flop_tb is
 
-    -- Constants
+    -- Constants.
     constant clk_period : time := 6 fs;
 
-    -- Ports
+    -- Signals.
     signal d     : std_logic := '0';
     signal clk   : std_logic := '0';
     signal q     : std_logic := '0';

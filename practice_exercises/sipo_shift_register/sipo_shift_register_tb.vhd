@@ -6,11 +6,11 @@ end entity sipo_shift_register_tb;
 
 architecture bench of sipo_shift_register_tb is
 
-    -- Constants
+    -- Constants.
     constant register_width : integer := 8;
     constant clk_period     : time    := 6 fs;
 
-    -- Ports
+    -- Signals.
     signal data_in      : std_logic                                     := '0';
     signal clk          : std_logic                                     := '0';
     signal rst          : std_logic                                     := '0';

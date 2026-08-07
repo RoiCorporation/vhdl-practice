@@ -7,11 +7,11 @@ end entity lock_tb;
 
 architecture rtl of lock_tb is
 
-    -- Constants
+    -- Constants.
     constant clk_period        : time    := 6 fs;
     constant combination_width : integer := 8;
 
-    -- Signals
+    -- Signals.
     signal rst                   : std_logic                                        := '0';
     signal clk                   : std_logic                                        := '0';
     signal edit_lock_combination : std_logic                                        := '0';

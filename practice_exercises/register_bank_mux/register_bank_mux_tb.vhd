@@ -42,6 +42,8 @@ entity register_bank_mux_tb is
 end entity register_bank_mux_tb;
 
 architecture rtl of register_bank_mux_tb is
+
+    -- Signals.
     signal selector     : std_logic_vector(register_address_width - 1 downto 0)                   := (others => '0'); --! Selector input to choose which register output to forward.
     signal bank_outputs : bank_ports_t(register_amount - 1 downto 0)(register_width - 1 downto 0) := (others => (others => '0')); --! Array of register outputs from the register bank.
     signal output       : std_logic_vector(register_width - 1 downto 0)                           := (others => '0'); --! Output of the selected register value.

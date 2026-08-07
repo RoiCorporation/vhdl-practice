@@ -4,10 +4,12 @@ use ieee.numeric_std.all;
 
 entity sipo_shift_register is
 
+    -- Generics.
     generic (
         register_width : integer := 8
     );
 
+    -- Ports.
     port (
         data_in      : in std_logic;
         clk          : in std_logic;
