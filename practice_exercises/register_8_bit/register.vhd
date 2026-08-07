@@ -21,43 +21,50 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --------------------------------------------------------------------------------
---! @title Integer ALU
+--! @title Register
 --! @author Roi (r.lopezbarata@gmail.com)
 --! @version 1.0
 --! @date 06-08-2026
 --! @copyright This work is licensed under the MIT License.
---! @brief Integer 32-bit ALU implementation inspired by the RISC-V specification.
+--! @brief Implementation of a classic PIPO register.
 --------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity alu is
+--! This is a classic PIPO register with synchronous reset and load enable.
+entity register is
 
-    -- Generics
+    -- Generics.
     generic (
-        data_length   : integer := 32;
-        opcode_length : integer := 7
+        register_width : integer := 32 --! Width of the register in bits.
     );
 
-    -- Ports
+    -- Ports.
     port (
-        opcode : in std_logic_vector(opcode_length - 1 downto 0);
-        a      : in std_logic_vector(data_length - 1 downto 0);
-        b      : in std_logic_vector(data_length - 1 downto 0);
-        c      : out std_logic_vector(data_length - 1 downto 0)
+        rst    : in std_logic; --! Synchronous reset signal.
+        clk    : in std_logic; --! Clock signal.
+        load   : in std_logic; --! Load enable signal.
+        input  : in std_logic_vector(register_width - 1 downto 0); --! Input data to be loaded into the register.
+        output : out std_logic_vector(register_width - 1 downto 0) --! Output data from the register.
     );
-end entity alu;
+end entity register;
 
-architecture rtl of alu is
+architecture rtl of register is
 begin
-    c <= std_logic_vector(unsigned(a) + unsigned(b)) when opcode = "0000000" else
-        a and b when opcode = "0000001" else
-        a or b when opcode = "0000010" else
-        a nand b when opcode = "0000011" else
-        a nor b when opcode = "0000100" else
-        a xor b when opcode = "0000101" else
-        not a when opcode = "0000110" else
-        not b when opcode = "0000111";
+
+    --! Process that implements the behavior of the register. It updates the output
+    --! on the rising edge of the clock, based on the reset and load signals.
+    register_beh : process (clk)
+    begin
+        if rising_edge(clk) then
+            if rst = '1' then
+                output <= (others => '0');
+            elsif load = '1' then
+                output <= input;
+            end if;
+        end if;
+    end process register_beh;
+
 end architecture rtl;

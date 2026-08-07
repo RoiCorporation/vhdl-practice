@@ -21,43 +21,23 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --------------------------------------------------------------------------------
---! @title Integer ALU
+--! @title CPU types
 --! @author Roi (r.lopezbarata@gmail.com)
 --! @version 1.0
---! @date 06-08-2026
+--! @date 07-08-2026
 --! @copyright This work is licensed under the MIT License.
---! @brief Integer 32-bit ALU implementation inspired by the RISC-V specification.
+--! @brief Custom types and declarations used in different files of this CPU project.
 --------------------------------------------------------------------------------
 
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity alu is
-
-    -- Generics
-    generic (
-        data_length   : integer := 32;
-        opcode_length : integer := 7
-    );
-
-    -- Ports
-    port (
-        opcode : in std_logic_vector(opcode_length - 1 downto 0);
-        a      : in std_logic_vector(data_length - 1 downto 0);
-        b      : in std_logic_vector(data_length - 1 downto 0);
-        c      : out std_logic_vector(data_length - 1 downto 0)
-    );
-end entity alu;
-
-architecture rtl of alu is
-begin
-    c <= std_logic_vector(unsigned(a) + unsigned(b)) when opcode = "0000000" else
-        a and b when opcode = "0000001" else
-        a or b when opcode = "0000010" else
-        a nand b when opcode = "0000011" else
-        a nor b when opcode = "0000100" else
-        a xor b when opcode = "0000101" else
-        not a when opcode = "0000110" else
-        not b when opcode = "0000111";
-end architecture rtl;
+--! This package contains custom types and constants used in the CPU project,
+--! including register specifications and array types for register bank ports.
+package cpu_types is
+    constant register_amount        : natural := 32; --! Amount of general purpose registers available in the CPU.
+    constant register_width         : natural := 32; --! Width of the general purpose registers in bits.
+    constant register_address_width : natural := 5; --! Bits needed to address every general purpose register.
+    type bank_ports_t is array (natural range <>) of std_logic_vector; --! Array type for the port entries of the register bank.
+end package cpu_types;

@@ -21,8 +21,7 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --------------------------------------------------------------------------------
---! @title Integer ALU testbench.
---! @file alu_tb.vhd
+--! @title Integer ALU testbench
 --! @author Roi (r.lopezbarata@gmail.com)
 --! @version 1.0
 --! @date 06-08-2026
