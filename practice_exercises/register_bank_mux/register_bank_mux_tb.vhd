@@ -49,7 +49,7 @@ architecture rtl of register_bank_mux_tb is
 begin
 
     --! Instance of the register bank multiplexer.
-    dut : entity work.register_bank_mux
+    dut : entity work.register_bank_mux(rtl)
         port map
         (
             selector     => selector,

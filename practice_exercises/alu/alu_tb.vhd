@@ -21,10 +21,10 @@
 -- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 -- SOFTWARE.
 --------------------------------------------------------------------------------
---! @title Integer ALU testbench
+--! @title Testbench for the Integer ALU
 --! @author Roi (r.lopezbarata@gmail.com)
 --! @version 1.0
---! @date 06-08-2026
+--! @date 07-08-2026
 --! @copyright This work is licensed under the MIT License.
 --! @brief Testbench for the integer 32-bit ALU implementation.
 --------------------------------------------------------------------------------
@@ -33,22 +33,29 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
+--! This is a testbench for the ALU (Arithmetic Logic Unit) that performs basic
+--! arithmetic and logic operations on two 32-bit inputs. The testbench applies
+--! various test cases to verify the correct functionality of the ALU by checking
+--! the output against expected results for different operations determined by
+--! the 7-bit opcode input.
 entity alu_tb is
 end entity alu_tb;
 
 architecture bench of alu_tb is
+
     -- Constants
-    constant data_length   : integer := 32;
-    constant opcode_length : integer := 7;
+    constant data_length   : integer := 32; --! Length of the input and output data vectors.
+    constant opcode_length : integer := 7; --! Length of the opcode vector.
 
     -- Signals
-    signal opcode : std_logic_vector(opcode_length - 1 downto 0) := (others => '0');
-    signal a      : std_logic_vector(data_length - 1 downto 0)   := (others => '0');
-    signal b      : std_logic_vector(data_length - 1 downto 0)   := (others => '0');
-    signal c      : std_logic_vector(data_length - 1 downto 0)   := (others => '0');
+    signal opcode : std_logic_vector(opcode_length - 1 downto 0) := (others => '0'); --! 7-bit opcode input that determines the operation to be performed.
+    signal a      : std_logic_vector(data_length - 1 downto 0)   := (others => '0'); --! First 32-bit input operand.
+    signal b      : std_logic_vector(data_length - 1 downto 0)   := (others => '0'); --! Second 32-bit input operand.
+    signal c      : std_logic_vector(data_length - 1 downto 0)   := (others => '0'); --! 32-bit output result.
 
 begin
 
+    --! Instance of the integer ALU.
     dut : entity work.alu(rtl)
         generic map(
             data_length => data_length
@@ -61,7 +68,9 @@ begin
             c      => c
         );
 
-    -- Stimulus process
+    --! Process to generate test cases for the integer ALU. It applies different
+    --! opcode values and input operands, and checks the output against expected results,
+    --! asserting errors if the output does not match the expected value.
     p_stim : process
     begin
         -- Test addition (opcode = 0000000)
@@ -129,6 +138,13 @@ begin
         wait for 1 ns;
         assert c = "00001100000000000000100000000001"
         report "NOT b should be 00001100000000000000100000000001, got " & to_string(c)
+            severity error;
+
+        -- Test non supported operation (opcode = 1000111)
+        opcode <= "1000111";
+        wait for 1 ns;
+        assert c = "00000000000000000000000000000000"
+        report "Non supported operation should return 00000000000000000000000000000000, got " & to_string(c)
             severity error;
 
         wait;

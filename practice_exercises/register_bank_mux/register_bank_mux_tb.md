@@ -29,5 +29,5 @@ different selector values and checking the output against expected results.
 
 ## Instantiations
 
-- dut: work.register_bank_mux
+- dut: work.register_bank_mux(rtl)
   -  Instance of the register bank multiplexer.

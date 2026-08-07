@@ -1,5 +1,5 @@
 
-# Package: cpu_types 
+# Package: cpu_types
 - **File**: cpu_types.vhd
 - **Title:**  CPU types
 - **Author:**  Roi (r.lopezbarata@gmail.com)
